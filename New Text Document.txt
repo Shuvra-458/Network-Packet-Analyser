@@ -1,0 +1,60 @@
+import tkinter as tk
+from tkinter import filedialog, messagebox, ttk
+import analyzer  # Your backend logic file
+import os
+
+def browse_file():
+    file_path = filedialog.askopenfilename(filetypes=[("PCAP files", "*.pcap")])
+    if file_path:
+        entry_path.delete(0, tk.END)
+        entry_path.insert(0, file_path)
+
+def analyze_file():
+    path = entry_path.get()
+    if not os.path.exists(path):
+        messagebox.showerror("Error", "Invalid PCAP file path.")
+        return
+    
+    try:
+        analyzer.analyze_pcap(path)
+        results = analyzer.device_violations
+
+        for i in tree.get_children():
+            tree.delete(i)
+
+        for ip, violations in results.items():
+            mdp = analyzer.calculate_mdp(ip)
+            mac = analyzer.get_mac_address(ip, analyzer.arp_packets)
+            tree.insert("", tk.END, values=(ip, mac or "N/A", *violations, f"{mdp:.2f}%"))
+
+    except Exception as e:
+        messagebox.showerror("Analysis Failed", str(e))
+
+# GUI Window
+root = tk.Tk()
+root.title("Network Packet Analyzer")
+root.geometry("950x400")
+root.resizable(False, False)
+
+# File input
+frame_top = tk.Frame(root, pady=10)
+frame_top.pack()
+
+entry_path = tk.Entry(frame_top, width=60)
+entry_path.pack(side=tk.LEFT, padx=10)
+
+browse_btn = tk.Button(frame_top, text="Browse", command=browse_file)
+browse_btn.pack(side=tk.LEFT)
+
+analyze_btn = tk.Button(root, text="Analyze", command=analyze_file, bg="#4CAF50", fg="white", padx=10, pady=5)
+analyze_btn.pack(pady=5)
+
+# Table for displaying results
+columns = ("IP", "MAC", "Rule1", "Rule2", "Rule3", "Rule4", "Rule5", "Rule6", "Rule7", "Rule8", "MDP")
+tree = ttk.Treeview(root, columns=columns, show="headings", height=12)
+for col in columns:
+    tree.heading(col, text=col)
+    tree.column(col, anchor=tk.CENTER, width=80 if col != "IP" else 100)
+tree.pack(padx=10)
+
+root.mainloop()
