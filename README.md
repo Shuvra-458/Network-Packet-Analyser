@@ -16,13 +16,21 @@ A network traffic analysis tool that reads .pcap (packet capture) files, detects
 
 🛡️ Detection Rules
 Rule No	Detection Logic
+
 Rule 1	Common Destination Ports: Detects traffic on HTTP (80), HTTPS (443), DNS (53)
+
 Rule 2	Excessive Traffic (DDoS Detection): Too many packets in short time
+
 Rule 3	Packet Size & Count: Large packets or too many packets
+
 Rule 4	Unsolicited ARP Replies: Possible ARP spoofing
+
 Rule 5	Large DNS Responses: Possible data exfiltration
+
 Rule 6	Excessive ICMP Echo Requests: ICMP flooding
+
 Rule 7	Excessive TCP SYN Packets: SYN flood detection
+
 Rule 8	IP Scanning Multiple Ports: Possible port scanning behavior
 
 🖥️ Requirements
