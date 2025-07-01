@@ -1,60 +1,84 @@
-📡 Network Packet Analyzer
-A network traffic analysis tool that reads .pcap (packet capture) files, detects possible malicious activity based on multiple detection rules, and presents the results in a user-friendly Streamlit web frontend.
+# 📡 Network Packet Analyzer
 
-✅ Features
+A Python-based network traffic analysis tool with a **Streamlit web frontend**. It processes `.pcap` (packet capture) files and detects suspicious network activities using **8 predefined security rules**, calculates **Malicious Device Probability (MDP)**, and provides results in an interactive UI.
 
-📥 Upload and Analyze PCAP files
+---
 
-🛡️ 8 Built-in Detection Rules for common network threats
+## 🚀 Features
 
-📊 MDP (Malicious Device Probability) calculation per device
+- ✅ Analyze `.pcap` files (Wireshark captures)
+- ✅ 8 rule-based detection checks (DDoS, ARP Spoofing, Port Scans, etc.)
+- ✅ Malicious Device Probability (MDP) score for each device
+- ✅ Interactive web frontend using **Streamlit**
+- ✅ Export results as CSV
+- ✅ Supports packaging as a standalone `.exe`
 
-📃 Results shown in interactive DataFrames
+---
 
-📤 Export results as CSV
+## 🛡️ Detection Rules
 
-🌐 Streamlit Web UI
+| Rule | Description |
+|---- | ---- |
+| **Rule 1** | Common Destination Ports (HTTP, HTTPS, DNS) |
+| **Rule 2** | Excessive Traffic (Possible DDoS) |
+| **Rule 3** | Large Packets / High Packet Counts |
+| **Rule 4** | Unsolicited ARP Replies (ARP Spoofing) |
+| **Rule 5** | Large DNS Responses (Exfiltration) |
+| **Rule 6** | ICMP Echo Flood |
+| **Rule 7** | TCP SYN Flood |
+| **Rule 8** | Port Scanning Detection |
 
-🛡️ Detection Rules
-Rule No	Detection Logic
+---
 
-Rule 1	Common Destination Ports: Detects traffic on HTTP (80), HTTPS (443), DNS (53)
+## 📂 Project Structure
 
-Rule 2	Excessive Traffic (DDoS Detection): Too many packets in short time
+Network-Packet-Analyser/
+├── analyser.py # Backend logic (Scapy-based analysis)
+├── streamlit_app.py # Streamlit frontend (Web UI)
+├── requirements.txt # Python dependencies
+├── .gitignore
+└── sample.pcap # (Optional test PCAP file)
 
-Rule 3	Packet Size & Count: Large packets or too many packets
+yaml
+Copy
+Edit
 
-Rule 4	Unsolicited ARP Replies: Possible ARP spoofing
+---
 
-Rule 5	Large DNS Responses: Possible data exfiltration
+## 🖥️ Installation & Running Locally
 
-Rule 6	Excessive ICMP Echo Requests: ICMP flooding
+### ✅ 1. Install Python packages:
 
-Rule 7	Excessive TCP SYN Packets: SYN flood detection
-
-Rule 8	IP Scanning Multiple Ports: Possible port scanning behavior
-
-🖥️ Requirements
-Install all required Python packages:
-
+```bash
 pip install -r requirements.txt
-
-Main libraries used:
-
-scapy
-
-pandas
+Dependencies:
 
 streamlit
 
+pandas
 
-🚀 Running the Streamlit Frontend
+scapy
 
+(Optional for EXE build: pyinstaller)
+
+✅ 2. Run the Streamlit frontend:
+bash
+Copy
+Edit
 streamlit run streamlit_app.py
+Then open in browser:
 
-Then open:
-
+arduino
+Copy
+Edit
 http://localhost:8501
+📈 Output Features
+Device-wise rule violation table
 
+MDP percentage for each IP
 
+Rule-wise breakdown (all 8 rules)
 
+CSV Export option
+
+Full rule descriptions displayed on UI
