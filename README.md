@@ -35,16 +35,24 @@ Rule 8	IP Scanning Multiple Ports: Possible port scanning behavior
 
 🖥️ Requirements
 Install all required Python packages:
+
 pip install -r requirements.txt
+
 Main libraries used:
 
 scapy
+
 pandas
+
 streamlit
 
+
 🚀 Running the Streamlit Frontend
+
 streamlit run streamlit_app.py
+
 Then open:
+
 http://localhost:8501
 
 
