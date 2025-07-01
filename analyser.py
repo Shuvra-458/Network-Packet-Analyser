@@ -3,6 +3,9 @@ import time
 import csv
 from collections import defaultdict
 
+global arp_packets
+arp_packets = []
+
 # Rule 1: Common destination ports for TCP and UDP
 def check_common_ports(pkt, device_ip):
    common_ports = [80, 443, 53]
@@ -113,4 +116,4 @@ def analyze_pcap(pcap_file):
            timestamp = int(time.time()) # Use time in seconds for Rule 2
            check_excessive_traffic(pkt, timestamp, device_ip, packet_counts) # Pass packet_counts here
            check_packet_count_and_size(pkt, packet_count, device_ip)
-           check_unsolicited_arp(pkt, arp_request_set, arp_reply_
+           check_unsolicited_arp(pkt, arp_request_set, arp_reply_set, device_ip)
