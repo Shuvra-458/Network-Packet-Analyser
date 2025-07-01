@@ -2,6 +2,7 @@
 A network traffic analysis tool that reads .pcap (packet capture) files, detects possible malicious activity based on multiple detection rules, and presents the results in a user-friendly Streamlit web frontend.
 
 ✅ Features
+
 📥 Upload and Analyze PCAP files
 
 🛡️ 8 Built-in Detection Rules for common network threats
