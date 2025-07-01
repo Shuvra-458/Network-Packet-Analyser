@@ -1,72 +1,43 @@
-# Cybersecurity Packet Analyzer
+📡 Network Packet Analyzer
+A network traffic analysis tool that reads .pcap (packet capture) files, detects possible malicious activity based on multiple detection rules, and presents the results in a user-friendly Streamlit web frontend.
 
-## Overview
-This project is a cybersecurity packet analyzer built using Python and Scapy. It analyzes network traffic from a PCAP file and detects potential malicious activity based on various predefined rules.
+✅ Features
+📥 Upload and Analyze PCAP files
 
-## Features
-- Detects traffic on common ports (80, 443, 53)
-- Identifies excessive traffic (DDoS detection)
-- Flags unusually large packet sizes
-- Detects unsolicited ARP replies
-- Identifies large DNS responses
-- Monitors excessive ICMP echo requests
-- Detects excessive TCP SYN packets
-- Identifies IP scanning activities
-- Computes Malicious Device Probability (MDP) for each device
+🛡️ 8 Built-in Detection Rules for common network threats
 
-## Prerequisites
-- Python 3.x
-- Scapy library
-- A valid PCAP file for analysis
+📊 MDP (Malicious Device Probability) calculation per device
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/cybersecurity-packet-analyzer.git
-   cd cybersecurity-packet-analyzer
-   ```
-2. Install dependencies:
-   ```bash
-   pip install scapy
-   ```
+📃 Results shown in interactive DataFrames
 
-## Usage
-1. Run the script with a PCAP file:
-   ```bash
-   python analyze_pcap.py path/to/pcap/file.pcap
-   ```
-2. The script will process the packets and output detected security violations per device.
+📤 Export results as CSV
 
-## Detection Rules
-| Rule | Description |
-|------|-------------|
-| 1 | Detects common destination ports (80, 443, 53) |
-| 2 | Detects excessive traffic (potential DDoS attack) |
-| 3 | Identifies large packet sizes (>1500 bytes) |
-| 4 | Detects unsolicited ARP replies |
-| 5 | Flags large DNS responses (>512 bytes) |
-| 6 | Detects excessive ICMP echo requests |
-| 7 | Monitors excessive TCP SYN packets |
-| 8 | Identifies excessive port scanning activity |
+🌐 Streamlit Web UI
 
-## Malicious Device Probability (MDP)
-The script calculates an MDP score for each device based on the number of triggered rules.
-MDP = (Number of violations / 8) * 100%
+🛡️ Detection Rules
+Rule No	Detection Logic
+Rule 1	Common Destination Ports: Detects traffic on HTTP (80), HTTPS (443), DNS (53)
+Rule 2	Excessive Traffic (DDoS Detection): Too many packets in short time
+Rule 3	Packet Size & Count: Large packets or too many packets
+Rule 4	Unsolicited ARP Replies: Possible ARP spoofing
+Rule 5	Large DNS Responses: Possible data exfiltration
+Rule 6	Excessive ICMP Echo Requests: ICMP flooding
+Rule 7	Excessive TCP SYN Packets: SYN flood detection
+Rule 8	IP Scanning Multiple Ports: Possible port scanning behavior
 
-## Example Output
-```bash
-Device: 192.168.1.5
-Violations: [1, 0, 1, 0, 0, 1, 0, 0]
-Malicious Device Probability: 37.5%
-```
+🖥️ Requirements
+Install all required Python packages:
+pip install -r requirements.txt
+Main libraries used:
 
-## Troubleshooting
-- Ensure the PCAP file is valid and contains network packets.
-- Run the script with administrator/root privileges if required.
-- Verify Scapy installation: `pip show scapy`.
+scapy
+pandas
+streamlit
+
+🚀 Running the Streamlit Frontend
+streamlit run streamlit_app.py
+Then open:
+http://localhost:8501
 
 
-## Author
-Shuvrajyoti
-[Shuvra-458](https://github.com/Shuvra-458)
 
